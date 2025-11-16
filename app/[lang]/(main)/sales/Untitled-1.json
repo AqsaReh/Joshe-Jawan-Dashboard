@@ -1,0 +1,177 @@
+
+{
+    "header-data": {
+        "sale_date": "2023-10-01",
+        "day_sale_data": {
+            "day_sale": 751,
+            "last_day_sale": 651,
+            "target_sale": 1080,
+            "day_sale_growth": "275%"
+        },
+        "ytd_sale_data": {
+            "ytd_sale": 6183,
+            "sply_ytd_sale": 6083,
+            "target_ytd_sale": 20000,
+            "ytd_sale_growth": "25%"
+        },
+        "mtd_sale_data": {
+            "mtd_sale": 751,
+            "last_mtd_sale": 651,
+            "sply_mtd_sale": 500,
+            "sply_sale_growth": 500,
+            "target_mtd_sale": 1080,
+            "mtd_sale_growth": "275%"
+        }
+    }
+}
+
+{
+  "graph_data": {
+    "current_year": {
+      "2023-01": 500,
+      "2023-02": 600,
+      "2023-03": 700,
+      "2023-04": 800,
+      "2023-05": 900,
+      "2023-06": 1000,
+      "2023-07": 1100,
+      "2023-08": 1200,
+      "2023-09": 1300,
+      "2023-10": 1400,
+      "2023-11": 1400,
+      "2023-12": 1400
+    },
+    "last_year": {
+      "2022-01": 450,
+      "2022-02": 550,
+      "2022-03": 650,
+      "2022-04": 750,
+      "2022-05": 850,
+      "2022-06": 950,
+      "2022-07": 1050,
+      "2022-08": 1150,
+      "2022-09": 1250,
+      "2022-10": 1350,
+      "2022-11": 1350,
+      "2022-12": 1350
+    }
+  }
+}
+
+
+// Total universe
+{
+    "data": {
+        "total_universe": 1500,
+    
+    }
+}
+
+// Distributor Group wise sale, ucc, repeat orders
+// hello 👋👋👋👋👋👋👋👋👋👋👋 yes i'm here
+{
+    "data": [
+        {
+            "Dist_Group": "Premier Sales (Pvt) Ltd.",
+            "Sales": 5000,
+            "UCC": 4000,
+            "Repeat_Orders": 600,
+        },
+        {
+            "Dist_Group": "UDL Distribution (PVT) Ltd",
+            "Sales": 3000,
+            "UCC": 2500,
+            "Repeat_Orders": 300,
+        },
+        {
+            "Dist_Group": "Nazir Distributors",
+            "Sales": 2000,
+            "UCC": 1800,
+            "Repeat_Orders": 200,
+        },
+        {
+            "Dist_Group": "Others",
+            "Sales": 1000,
+            "UCC": 800,
+            "Repeat_Orders": 100,
+        }
+    ]
+}
+
+// Distributor branch wise sale, ucc, repeat orders
+{
+    "data": [
+        {
+            "Dist_Group": "Premier Sales (Pvt) Ltd.",
+            "Dist_Branch": "Premier Sales (Pvt) Ltd. (MUX)",
+            "Sales": 2000,
+            "UCC": 1500,
+            "Repeat_Orders": 250,
+        },
+        {
+            "Dist_Branch": "Premier Sales (Pvt) Ltd.",
+            "Dist_Branch": "Premier Sales (Pvt) Ltd. (HFZ)",
+            "Sales": 3000,
+            "UCC": 2500,
+            "Repeat_Orders": 300,
+        },
+        {
+            "Dist_Group": "UDL Distribution (PVT) Ltd",
+            "Dist_Branch": "UDL Distribution (PVT) Ltd (MUX)",
+            "Sales": 1500,
+            "UCC": 1200,
+            "Repeat_Orders": 150,
+        },
+        {
+            "Dist_Group": "UDL Distribution (PVT) Ltd",
+            "Dist_Branch": "UDL Distribution (PVT) Ltd (HFZ)",
+            "Sales": 1500,
+            "UCC": 1300,
+            "Repeat_Orders": 150,
+        },
+        {
+            "Dist_Group": "Nazir Distributors",
+            "Dist_Branch": "Nazir Distributors (MUX)",
+            "Sales": 1000,
+            "UCC": 800,
+            "Repeat_Orders": 100,
+        },
+        {
+            "Dist_Group": "Nazir Distributors",
+            "Dist_Branch": "Nazir Distributors (HFZ)",
+            "Sales": 1000,
+            "UCC": 1000,
+            "Repeat_Orders": 100,
+        }
+    ]
+}
+
+// Booker wise sale, ucc, repeat orders
+{
+    "data": [
+        {
+            "Booker": "Booker A",
+            "Sales": 1000,
+            "UCC": 800,
+            "Repeat_Orders": 100,
+        },
+        {
+            "Booker": "Booker B",
+            "Sales": 1500,
+            "UCC": 1200,
+            "Repeat_Orders": 200,
+        },
+        {
+            "Booker": "Booker C",
+            "Sales": 2000,
+            "UCC": 1800,
+            "Repeat_Orders": 300,
+        },
+        {
+            "Booker": "Booker D",
+            "Sales": 2500,
+            "UCC": 2200,
+            "Repeat_Orders": 400,
+        }
+    ]
+}
