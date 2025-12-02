@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { cn, isLocationMatch, getDynamicPath } from "@/lib/utils";
 import { useSidebar, useThemeStore } from "@/store";
 import SidebarLogo from "../common/logo";
-import { menusConfig } from "@/config/menus";
+import { menusConfig, ClassicNavType } from "@/config/menus";
 import MenuLabel from "../common/menu-label";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -16,7 +16,7 @@ const ClassicSidebar = ({ trans }: { trans: string }) => {
   const { sidebarBg } = useSidebar();
   const [activeSubmenu, setActiveSubmenu] = useState<number | null>(null);
   const [activeMultiMenu, setMultiMenu] = useState<number | null>(null);
-  const menus = menusConfig?.sidebarNav?.classic || [];
+  const menus: ClassicNavType[] = menusConfig?.sidebarNav?.classic || [];
   const { collapsed, setCollapsed } = useSidebar();
   const { isRtl } = useThemeStore();
   const [hovered, setHovered] = useState<boolean>(false);
@@ -98,13 +98,16 @@ const ClassicSidebar = ({ trans }: { trans: string }) => {
             "text-start": collapsed && hovered,
           })}
         >
-          {menus.map((item, i) => (
+          {menus.map((item: ClassicNavType, i: number) => {
+            const hasChild = 'child' in item && item.child;
+            const isHeader = 'isHeader' in item && item.isHeader;
+            return (
             <li key={`menu_key_${i}`}>
               {/* single menu  */}
 
-              {!item.child && !item.isHeader && (
+              {!hasChild && !isHeader && (
                 <SingleMenuItem
-                  item={item}
+                  item={item as any}
                   collapsed={collapsed}
                   hovered={hovered}
                   trans={trans}
@@ -112,15 +115,15 @@ const ClassicSidebar = ({ trans }: { trans: string }) => {
               )}
 
               {/* menu label */}
-              {item.isHeader && !item.child && (!collapsed || hovered) && (
-                <MenuLabel item={item} trans={trans} />
-              )}
+              {isHeader && !hasChild && (!collapsed || hovered) ? (
+                <MenuLabel item={item as any} trans={trans} />
+              ) : null}
 
               {/* sub menu */}
-              {item.child && (
+              {hasChild ? (
                 <>
                   <SubMenuHandler
-                    item={item}
+                    item={item as any}
                     toggleSubmenu={toggleSubmenu}
                     index={i}
                     activeSubmenu={activeSubmenu}
@@ -134,7 +137,7 @@ const ClassicSidebar = ({ trans }: { trans: string }) => {
                       toggleMultiMenu={toggleMultiMenu}
                       activeMultiMenu={activeMultiMenu}
                       activeSubmenu={activeSubmenu}
-                      item={item}
+                      item={item as any}
                       index={i}
 
 
@@ -142,9 +145,10 @@ const ClassicSidebar = ({ trans }: { trans: string }) => {
                     />
                   )}
                 </>
-              )}
+              ) : null}
             </li>
-          ))}
+            ) as React.ReactElement;
+          })}
         </ul>
         {!collapsed && (
           <div className="-mx-2 ">

@@ -51,7 +51,7 @@ const SheetActions = ({ task, taskId }: {
                 total={task?.assign?.length}
                 max={3}
               >
-                {task?.assign?.map((member, i) => (
+                {task?.assign?.map((member: { image: { src: string }; name: string }, i: number) => (
                   <TooltipProvider key={`assign-member-task-${i}`}>
                     <Tooltip>
                       <TooltipTrigger asChild>

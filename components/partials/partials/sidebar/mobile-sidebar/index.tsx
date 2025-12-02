@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { cn, isLocationMatch } from "@/lib/utils";
 import { useSidebar, useThemeStore } from "@/store";
 import SidebarLogo from "../common/logo";
-import { menusConfig } from "@/config/menus";
+import { menusConfig, ClassicNavType } from "@/config/menus";
 import MenuLabel from "../common/menu-label";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -15,7 +15,7 @@ const MobileSidebar = ({ className, trans }: { className?: string, trans: any })
   const { sidebarBg, mobileMenu, setMobileMenu } = useSidebar();
   const [activeSubmenu, setActiveSubmenu] = useState<number | null>(null);
   const [activeMultiMenu, setMultiMenu] = useState<number | null>(null);
-  const menus = menusConfig?.sidebarNav?.classic || [];
+  const menus: ClassicNavType[] = menusConfig?.sidebarNav?.classic || [];
   const { collapsed } = useSidebar();
 
   const toggleSubmenu = (i: number) => {
@@ -90,24 +90,27 @@ const MobileSidebar = ({ className, trans }: { className?: string, trans: any })
               " space-y-2 text-center": collapsed,
             })}
           >
-            {menus.map((item, i) => (
+            {menus.map((item: ClassicNavType, i: number) => {
+              const hasChild = 'child' in item && item.child;
+              const isHeader = 'isHeader' in item && item.isHeader;
+              return (
               <li key={`menu_key_${i}`}>
                 {/* single menu  */}
 
-                {!item.child && !item.isHeader && (
-                  <SingleMenuItem item={item} collapsed={collapsed} />
+                {!hasChild && !isHeader && (
+                  <SingleMenuItem item={item as any} collapsed={collapsed} />
                 )}
 
                 {/* menu label */}
-                {item.isHeader && !item.child && !collapsed && (
-                  <MenuLabel item={item} trans={trans} />
+                {isHeader && !hasChild && !collapsed && (
+                  <MenuLabel item={item as any} trans={trans} />
                 )}
 
                 {/* sub menu */}
-                {item.child && (
+                {hasChild ? (
                   <>
                     <SubMenuHandler
-                      item={item}
+                      item={item as any}
                       toggleSubmenu={toggleSubmenu}
                       index={i}
                       activeSubmenu={activeSubmenu}
@@ -119,13 +122,14 @@ const MobileSidebar = ({ className, trans }: { className?: string, trans: any })
                         toggleMultiMenu={toggleMultiMenu}
                         activeMultiMenu={activeMultiMenu}
                         activeSubmenu={activeSubmenu}
-                        item={item}
+                        item={item as any}
                         index={i} title={""} trans={undefined} />
                     )}
                   </>
-                )}
+                ) : null}
               </li>
-            ))}
+              ) as React.ReactElement;
+            })}
           </ul>
         </ScrollArea>
       </div>

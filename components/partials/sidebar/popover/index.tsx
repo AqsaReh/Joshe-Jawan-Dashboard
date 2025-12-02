@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 import { cn, isLocationMatch, getDynamicPath } from "@/lib/utils";
 import SidebarLogo from "../common/logo";
-import { menusConfig } from "@/config/menus";
+import { menusConfig, ClassicNavType } from "@/config/menus";
 import MenuLabel from "../common/menu-label";
 import SingleMenuItem from "./single-menu-item";
 import SubMenuHandler from "./sub-menu-handler";
@@ -17,7 +17,7 @@ import AddBlock from "../common/add-block";
 const PopoverSidebar = ({ trans }: { trans: string }) => {
   const { collapsed, sidebarBg } = useSidebar();
   const { layout, isRtl } = useThemeStore();
-  const menus = menusConfig?.sidebarNav?.classic || [];
+  const menus: ClassicNavType[] = menusConfig?.sidebarNav?.classic || [];
   const [activeSubmenu, setActiveSubmenu] = useState<number | null>(null);
   const [activeMultiMenu, setMultiMenu] = useState<number | null>(null);
 
@@ -94,33 +94,36 @@ const PopoverSidebar = ({ trans }: { trans: string }) => {
             " space-y-2 text-center": collapsed,
           })}
         >
-          {menus.map((item, i) => (
+          {menus.map((item: ClassicNavType, i: number) => {
+            const hasChild = 'child' in item && item.child;
+            const isHeader = 'isHeader' in item && item.isHeader;
+            return (
             <li key={`menu_key_${i}`}>
               {/* single menu  */}
 
-              {!item.child && !item.isHeader && (
+              {!hasChild && !isHeader && (
                 <SingleMenuItem
-                  item={item}
+                  item={item as any}
                   collapsed={collapsed}
                   trans={trans}
                 />
               )}
 
               {/* menu label */}
-              {item.isHeader && !item.child && !collapsed && (
-                <MenuLabel item={item} trans={trans} />
+              {isHeader && !hasChild && !collapsed && (
+                <MenuLabel item={item as any} trans={trans} />
               )}
 
               {/* sub menu */}
-              {item.child && (
+              {hasChild ? (
                 <>
                   <SubMenuHandler
-                    item={item}
+                    item={item as any}
                     toggleSubmenu={toggleSubmenu}
                     index={i}
                     activeSubmenu={activeSubmenu}
                     collapsed={collapsed}
-                    menuTitle={item.title}
+                    menuTitle={'title' in item ? item.title : ''}
                     trans={trans}
                   />
                   {!collapsed && (
@@ -128,16 +131,17 @@ const PopoverSidebar = ({ trans }: { trans: string }) => {
                       toggleMultiMenu={toggleMultiMenu}
                       activeMultiMenu={activeMultiMenu}
                       activeSubmenu={activeSubmenu}
-                      item={item}
+                      item={item as any}
                       index={i}
 
                       trans={trans}
                     />
                   )}
                 </>
-              )}
+              ) : null}
             </li>
-          ))}
+            ) as React.ReactElement;
+          })}
         </ul>
         {!collapsed && (
           <div className="-mx-2 ">

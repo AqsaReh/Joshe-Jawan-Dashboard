@@ -1,14 +1,14 @@
 "use client"
 import { Button } from "@/components/ui/button"
-import { menusConfig } from "@/config/menus";
+import { menusConfig, MenuItemProps } from "@/config/menus";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from 'swiper/modules';
 const AllComponents = () => {
 
 
-  const menus = menusConfig.sidebarNav.modern[2]?.child?.[0]?.nested ?? [];
-  const menus2 = menusConfig.sidebarNav.modern[2]?.child?.[1]?.nested ?? [];
+  const menus = (menusConfig.sidebarNav.modern[2]?.child?.[0] as MenuItemProps)?.nested ?? [];
+  const menus2 = (menusConfig.sidebarNav.modern[2]?.child?.[1] as MenuItemProps)?.nested ?? [];
   const data = [...menus, ...menus2];
   return (
     <section className="py-16 2xl:py-20  relative " id="features">

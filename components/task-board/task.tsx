@@ -216,13 +216,15 @@ const Task = ({ task, onUpdateTask, boards }: TaskProps) => {
           )}
 
           <div className="flex flex-wrap items-center gap-1 mt-2">
-            <Badge
-              color={prioritiesColorMap[task.priority]}
+            {priority && (
+              <Badge
+                color={prioritiesColorMap[priority]}
 
-              className="text-[10px] px-1 py-0 rounded leading-4 capitalize"
-            >
-              {priority}
-            </Badge>
+                className="text-[10px] px-1 py-0 rounded leading-4 capitalize"
+              >
+                {priority}
+              </Badge>
+            )}
             {tags?.map((tag, i) => (
               <Badge
                 key={`badge-key-ssk-${i}`}
@@ -239,7 +241,7 @@ const Task = ({ task, onUpdateTask, boards }: TaskProps) => {
             </div>
             {assign?.length > 0 && (
               <AvatarGroup total={assign?.length} max={3} countClass="w-5 h-5">
-                {assign?.map((member, i) => (
+                {assign?.map((member: { image: { src: string }; name: string }, i: number) => (
                   <TooltipProvider key={`assign-member-task-${i}`}>
                     <Tooltip>
                       <TooltipTrigger asChild>

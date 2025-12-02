@@ -99,7 +99,7 @@ const TaskItem = ({ subtask, handlerSubSheet }: {
                     total={subtask.assign.length}
                     countClass="w-7 h-7"
                   >
-                    {subtask.assign?.map((user, i) => (
+                    {subtask.assign?.map((user: { image: string; name?: string }, i: number) => (
                       <Avatar
                         className=" ring-1 ring-background ring-offset-[2px]  ring-offset-background h-7 w-7"
                         key={`avatar-key-${i}`}
